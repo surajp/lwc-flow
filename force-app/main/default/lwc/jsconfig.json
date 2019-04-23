@@ -1,0 +1,38 @@
+{
+    "compilerOptions": {
+        "experimentalDecorators": true,
+        "baseUrl": ".",
+        "paths": {
+            "c/auraPubsub": [
+                "auraPubsub/auraPubsub.js"
+            ],
+            "c/errorPanel": [
+                "errorPanel/errorPanel.js"
+            ],
+            "c/ldsUtils": [
+                "ldsUtils/ldsUtils.js"
+            ],
+            "c/lwcFlowScreen": [
+                "lwcFlowScreen/lwcFlowScreen.js"
+            ],
+            "c/lwcflowbridge": [
+                "lwcflowbridge/lwcflowbridge.js"
+            ],
+            "c/newServiceFinalConfirmation": [
+                "newServiceFinalConfirmation/newServiceFinalConfirmation.js"
+            ],
+            "c/pubsub": [
+                "pubsub/pubsub.js"
+            ]
+        }
+    },
+    "include": [
+        "**/*",
+        "../../../../.sfdx/typings/lwc/**/*.d.ts"
+    ],
+    "typeAcquisition": {
+        "include": [
+            "jest"
+        ]
+    }
+}

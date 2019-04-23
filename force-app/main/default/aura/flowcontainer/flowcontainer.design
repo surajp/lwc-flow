@@ -1,0 +1,10 @@
+<design:component>
+    <design:attribute name="lwcname" label="LWC Name" description="Name of the LWC to be rendered" />
+    <design:attribute name="lwcdata" label="LWC Data" description="Stringified JSON data to be passed to the LWC" />
+    <design:attribute name="lwcstate" label="LWC State" description="Stringified JSON state of the LWC" />
+    <design:attribute name="opdata" label="Output Data" description="Stringified JSON data output" />
+    <design:attribute name="canNext" label="Allow Next" />
+    <design:attribute name="canBack" label="Allow Previous" />
+    <design:attribute name="canFinish" label="Allow Finish" />
+    <design:attribute name="canPause" label="Allow Pause" />
+</design:component>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <applicationVisibilities>
+        <application>Flow_with_Lwc</application>
+        <visible>true</visible>
+    </applicationVisibilities>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>lwcflow</label>
+    <tabSettings>
+        <tab>Flow_with_Lwc</tab>
+        <visibility>Visible</visibility>
+    </tabSettings>
+</PermissionSet>

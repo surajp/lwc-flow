@@ -1,0 +1,20 @@
+<aura:component implements="flexipage:availableForAllPageTypes,lightning:availableForFlowScreens">
+    <aura:attribute name="lwcname" type="String" access="public" />
+    <aura:attribute name="errors" type="String" access="private" default=""/>
+    <aura:attribute name="lwcdata" type="String" access="public" description="Stringified JSON data to be passed to the LWC" />
+    <aura:attribute name="lwcstate" type="String" access="public" description="Stringified JSON state of the LWC" />
+    <aura:attribute name="opdata" type="String" access="public" description="Stringified output JSON data" />
+
+    <aura:attribute name="canPause" type="Boolean" />
+    <aura:attribute name="canBack" type="Boolean" />
+    <aura:attribute name="canNext" type="Boolean" />
+    <aura:attribute name="canFinish" type="Boolean" />
+
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    {!v.body}
+    <aura:if isTrue="{!not(empty(v.errors))}">
+        <c:errorPanel friendlyMessage="{!v.errors}"></c:errorPanel>
+    </aura:if>
+    <c:flowfooter availableActions="{!v.availableActions}" containerCmpId="{!globalId}" canBack="{!v.canBack}" canNext="{v.canNext}" canFinish="{!v.canFinish}" canPause="{!v.canPause}"></c:flowfooter>
+</aura:component>

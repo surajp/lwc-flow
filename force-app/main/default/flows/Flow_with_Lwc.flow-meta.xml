@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Flow with LWC embedded.</description>
+    <interviewLabel>Flow with LWC {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Flow with Lwc</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Flow</processType>
+    <screens>
+        <name>Screen_One</name>
+        <label>Screen One</label>
+        <locationX>157</locationX>
+        <locationY>87</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <targetReference>Screen_two</targetReference>
+        </connector>
+        <fields>
+            <name>screenone</name>
+            <extensionName>c:flowcontainer</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>canNext</name>
+                <value>
+                    <booleanValue>true</booleanValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>lwcname</name>
+                <value>
+                    <stringValue>lwcFlowScreen</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>lwcstate</name>
+                <value>
+                    <elementReference>vLwcState</elementReference>
+                </value>
+            </inputParameters>
+            <isRequired>true</isRequired>
+            <outputParameters>
+                <assignToReference>vLwcState</assignToReference>
+                <name>lwcstate</name>
+            </outputParameters>
+            <outputParameters>
+                <assignToReference>vLwcOp</assignToReference>
+                <name>opdata</name>
+            </outputParameters>
+        </fields>
+        <showFooter>false</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Screen_two</name>
+        <label>Screen Two</label>
+        <locationX>337</locationX>
+        <locationY>125</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>screentwo</name>
+            <fieldText>{!vLwcOp}</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <startElementReference>Screen_One</startElementReference>
+    <status>Active</status>
+    <variables>
+        <description>Output data from the LWC. String works best</description>
+        <name>vLwcOp</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>State of the LWC</description>
+        <name>vLwcState</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

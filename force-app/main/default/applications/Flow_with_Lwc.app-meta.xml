@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <brand>
+        <headerColor>#0B813A</headerColor>
+        <shouldOverrideOrgTheme>false</shouldOverrideOrgTheme>
+    </brand>
+    <formFactors>Large</formFactors>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <label>Flow with LWC</label>
+    <navType>Standard</navType>
+    <tabs>Flow_with_Lwc</tabs>
+    <uiType>Lightning</uiType>
+    <utilityBar>Flow_with_Lwc_UtilityBar</utilityBar>
+</CustomApplication>
