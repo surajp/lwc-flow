@@ -22,11 +22,13 @@ export default class Lwcflowbridge extends LightningElement {
 
     async handleClickParent(metadata){
         try{
-            let retData = await this.handleNavigation(metadata);
-            if(!retData || retData == null)
-                retData = "";
-            unregisterAllListeners(this); // unregister all listeners before leaving this screen
-            fireLWCDone(this,retData,metadata,this.state);
+            if(metadata.containerCmpId === this.containerCmpId){
+                let retData = await this.handleNavigation(metadata);
+                if(!retData || retData == null)
+                    retData = "";
+                unregisterAllListeners(this); // unregister all listeners before leaving this screen
+                fireLWCDone(this,retData,metadata,this.state);
+            }
         }catch(err){
             // We don't unregister listeners here, since we have errors, we won't navigate away
             metadata.errors= err.message;
