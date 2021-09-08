@@ -1,3 +1,4 @@
+//Adding a comment to test action on PR
 public class MyNewClass{
 
     public MyNewClass(){
