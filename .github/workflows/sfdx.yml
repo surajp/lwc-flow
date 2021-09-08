@@ -29,7 +29,8 @@ jobs:
       - name: Get Diff
         uses: technote-space/get-diff-action@v5
         with:
-          PATTERNS: **/*.cls
+          PATTERNS: |
+            +(force-app)/**/*.cls
 
       - name: Code Analysis
         run: |
