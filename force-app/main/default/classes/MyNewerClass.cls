@@ -1,4 +1,4 @@
-//Adding a comment to test action on PR
+//Adding a comment to test action on PR. Just changing this now.
 public class MyNewerClass{
 
     public MyNewerClass(){
