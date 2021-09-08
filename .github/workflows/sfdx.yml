@@ -1,8 +1,5 @@
 name: SFDX CLI Scan
-# These are the PMD checks that happen on push
-
 on: pull_request
-name: CI
 jobs:
   build:
     name: Full Code Analysis
