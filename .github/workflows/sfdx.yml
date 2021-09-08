@@ -1,0 +1,54 @@
+name: SFDX CLI Scan
+# These are the PMD checks that happen on push
+
+on: pull_request:
+name: CI
+jobs:
+  build:
+    name: Full Code Analysis
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: '0'
+      
+      # Install Node
+      - name: Install Node
+        uses: actions/setup-node@v1
+
+      # Install Salesforce CLI
+      - name: Install Salesforce CLI
+        run: |
+          npm install sfdx-cli
+          node_modules/sfdx-cli/bin/run --version
+          node_modules/sfdx-cli/bin/run plugins --core
+      
+      # Install the code scanner
+      - name: Install Scanner
+        run: node_modules/sfdx-cli/bin/run plugins:install @salesforce/sfdx-scanner
+
+      - name: Get Diff
+        uses: technote-space/get-diff-action@v5
+        with:
+          PATTERNS: |
+            +*.cls
+
+      - name: Code Analysis
+        run: |
+          node_modules/sfdx-cli/bin/run scanner:run --target './**/*.cls' --pmdconfig './pmd-ruleset-pull-request.xml' -s 2
+        if: env.GIT_DIFF
+
+      # Grab the tokens and let them be assigned to a variable
+      - name: Token Assignment
+        shell: bash
+        run: 'echo ${{secrets.PROD_TOKEN}} > TOK_EN'
+
+      # Authorize the org
+      - name: Authorize Org
+        run: node_modules/sfdx-cli/bin/run force:auth:sfdxurl:store -f TOK_EN -s -a deploySandbox
+
+      # Deploy the changes to an org
+      - name: Deploy Changes to Sandbox and Test
+        run: node_modules/sfdx-cli/bin/run force:source:deploy -p ./force-app/main/default/ -l RunAllTestsInOrg -u deploySandbox --verbose
