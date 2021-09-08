@@ -34,8 +34,8 @@ jobs:
 
       - name: Code Analysis
         run: |
-          node_modules/sfdx-cli/bin/run scanner:run --target './**/*.cls' --pmdconfig './pmd-ruleset-pull-request.xml' -s 2
-        if: env.GIT_DIFF
+          node_modules/sfdx-cli/bin/run scanner:run --target ${{ env.GIT_DIFF_FILTERED }} --pmdconfig './pmd-ruleset-pull-request.xml' -s 2
+        if: env.GIT_DIFF_FILTERED
 
       # Grab the tokens and let them be assigned to a variable
       - name: Token Assignment
