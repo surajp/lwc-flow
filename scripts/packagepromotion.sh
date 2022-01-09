@@ -1,3 +1,6 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
 echo "Starting Script for Package Promotion"
 
 increment_version() {
@@ -33,10 +36,10 @@ echo "$( NEWPUBLICVERSIONNUMBER=$"$NEWPUBLICVERSIONNUMBER"  jq '.packageDirector
 
 # Create a new package version (with the previously incremented package version) and import the package version id for further use.
 echo "Creating new package version"
-sfdx force:package:version:create -p $PACKAGE_ID -f config/project-scratch-def.json -x -v devhub -c --json -w 50 > result.json
+node_modules/sfdx-cli/bin/run force:package:version:create -p $PACKAGE_ID -f config/project-scratch-def.json -x -v devhub -c --json -w 50 > result.json
 
 cat result.json
-cat result.json | jq '.result.SubscriberPackageVersionId' > packgeversionid.txt
+cat result.json | jq -r '.result.SubscriberPackageVersionId' > packgeversionid.txt
 
 PACKAGEVERSIONID=$( cat packgeversionid.txt )
 if [[ "$PACKAGEVERSIONID" == "null" ]]; then    
@@ -51,20 +54,7 @@ cat sfdx-project.json
 
 #This promotes the package version
 echo "Promoting Package"
-sfdx force:package:version:promote -p $PACKAGEVERSIONID --noprompt -v devhub
+node_modules/sfdx-cli/bin/run force:package:version:promote -p $PACKAGEVERSIONID --noprompt -v devhub
 
-
-echo "Updating docs"
-#updates docs with new installation id
-sed -i "s/04t.\{15\}/$PACKAGEVERSIONID/g" docs/installation.md
-
-#updates README with new installation id
-sed -i "s/04t.\{15\}/$PACKAGEVERSIONID/g" README.md
-
-git add sfdx-project.json
-git config --local user.email "action@github.com"
-git config --local user.name "GitHub Action Bot"
-git commit -m "Update Package Version with GitHub Action"
-git push
 exit 0
 
