@@ -1,4 +1,4 @@
-name: SFDX CLI Scan
+name: Scan and package creation
 on: pull_request
 jobs:
   build:
