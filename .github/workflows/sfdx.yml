@@ -44,8 +44,10 @@ jobs:
 
       # Authorize the org
       - name: Authorize Org
-        run: node_modules/sfdx-cli/bin/run force:auth:sfdxurl:store -f TOK_EN -s -a deploySandbox
+        run: |
+          node_modules/sfdx-cli/bin/run force:auth:sfdxurl:store -f TOK_EN -a devhub
 
-      # Deploy the changes to an org
-      - name: Deploy Changes to Sandbox and Test
-        run: node_modules/sfdx-cli/bin/run force:source:deploy -p ./force-app/main/default/ -l RunAllTestsInOrg -u deploySandbox --verbose
+      - name: Create new Package version and Promote
+        run: |
+          chmod +x scripts/packagepromotion.sh
+          ./scripts/packagepromotion.sh
